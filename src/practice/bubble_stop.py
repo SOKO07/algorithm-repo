@@ -4,31 +4,31 @@
 """
 
 
-def bubble_sort(a):
-    """a를 제자리에서 오름차순으로 정렬하고 (비교 횟수, 이동 횟수)를 돌려준다.
+def bubble_sort(a, stats=None):
+    """a를 제자리에서 정렬한다. stats를 주면 [비교, 이동] 횟수를 기록한다.
 
-    교환 한 번은 temp를 거치므로 이동 3회로 센다.
+    교환 한 번은 임시 변수 사용을 포함해 이동 3회로 센다.
     """
-    comparisons = 0
-    moves = 0
     n = len(a)
     for i in range(n - 1):
         swapped = False
         for j in range(n - 1 - i):
-            comparisons += 1
+            if stats is not None:
+                stats[0] += 1
             if a[j] > a[j + 1]:
                 a[j], a[j + 1] = a[j + 1], a[j]
-                moves += 3
+                if stats is not None:
+                    stats[1] += 3
                 swapped = True
         if not swapped:  # flag: 이번 회전에 교환이 없었으면 break
             break
-    return comparisons, moves
 
 
 if __name__ == "__main__":
     a = [2, 1, 3, 4, 5, 6, 7, 8, 9, 10]
 
     print("before:", *a)
-    comparisons, moves = bubble_sort(a)
+    stats = [0, 0]
+    bubble_sort(a, stats)
     print("after :", *a)
-    print(f"comparisons = {comparisons}, moves = {moves}")
+    print(f"comparisons = {stats[0]}, moves = {stats[1]}")

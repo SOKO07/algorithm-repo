@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="1260" viewBox="0 0 1000 1260">
+  <style>
+    text { font-family: sans-serif; fill: #243044; }
+    .title { font-size: 24px; font-weight: 700; }
+    .panel { font-size: 19px; font-weight: 700; }
+    .label { font-size: 13px; }
+    .value { font-size: 8px; font-weight: 600; }
+    .axis { stroke: #64748b; stroke-width: 1.5; }
+    .grid { stroke: #dbe3ec; stroke-width: 1; }
+  </style>
+  <text x="500" y="32" text-anchor="middle" class="title">n = 3,000: 입력 유형별 정렬 성능</text>
+  <rect x="295" y="52" width="16" height="16" fill="#2563eb"/><text x="317" y="65" class="label">삽입 정렬</text>
+  <rect x="445" y="52" width="16" height="16" fill="#f97316"/><text x="467" y="65" class="label">버블 정렬</text>
+  <rect x="595" y="52" width="16" height="16" fill="#16a34a"/><text x="617" y="65" class="label">놈 정렬</text>
+
+  <text x="130" y="102" class="panel">실행 시간 (ms, 로그 눈금)</text>
+  <line x1="130" y1="275" x2="940" y2="275" class="axis"/><line x1="130" y1="125" x2="130" y2="275" class="axis"/>
+  <line x1="130" y1="240.2" x2="940" y2="240.2" class="grid"/><line x1="130" y1="205.3" x2="940" y2="205.3" class="grid"/><line x1="130" y1="170.5" x2="940" y2="170.5" class="grid"/><line x1="130" y1="135.6" x2="940" y2="135.6" class="grid"/>
+  <text x="120" y="280" text-anchor="end" class="label">0.1</text><text x="120" y="245" text-anchor="end" class="label">1</text><text x="120" y="210" text-anchor="end" class="label">10</text><text x="120" y="175" text-anchor="end" class="label">100</text><text x="120" y="140" text-anchor="end" class="label">1,000</text>
+  <rect x="210" y="260.5" width="32" height="14.5" fill="#2563eb"/><rect x="248" y="265.1" width="32" height="9.9" fill="#f97316"/><rect x="286" y="258.5" width="32" height="16.5" fill="#16a34a"/>
+  <text x="226" y="254" text-anchor="middle" class="value">0.261</text><text x="264" y="258" text-anchor="middle" class="value">0.193</text><text x="302" y="252" text-anchor="middle" class="value">0.297</text>
+  <rect x="470" y="148.9" width="32" height="126.1" fill="#2563eb"/><rect x="508" y="146.7" width="32" height="128.3" fill="#f97316"/><rect x="546" y="133.2" width="32" height="141.8" fill="#16a34a"/>
+  <text x="486" y="143" text-anchor="middle" class="value">412.113</text><text x="524" y="141" text-anchor="middle" class="value">478.769</text><text x="562" y="128" text-anchor="middle" class="value">1164.066</text>
+  <rect x="730" y="159.3" width="32" height="115.7" fill="#2563eb"/><rect x="768" y="150.5" width="32" height="124.5" fill="#f97316"/><rect x="806" y="143.9" width="32" height="131.1" fill="#16a34a"/>
+  <text x="746" y="154" text-anchor="middle" class="value">207.499</text><text x="784" y="145" text-anchor="middle" class="value">373.319</text><text x="822" y="138" text-anchor="middle" class="value">574.498</text>
+  <text x="264" y="296" text-anchor="middle" class="label">정렬</text><text x="524" y="296" text-anchor="middle" class="label">역순</text><text x="784" y="296" text-anchor="middle" class="label">무작위</text>
+
+  <text x="130" y="382" class="panel">원소 비교 횟수</text>
+  <line x1="130" y1="555" x2="940" y2="555" class="axis"/><line x1="130" y1="405" x2="130" y2="555" class="axis"/>
+  <line x1="130" y1="480" x2="940" y2="480" class="grid"/><line x1="130" y1="405" x2="940" y2="405" class="grid"/>
+  <text x="120" y="560" text-anchor="end" class="label">0</text><text x="120" y="485" text-anchor="end" class="label">5M</text><text x="120" y="410" text-anchor="end" class="label">10M</text>
+  <rect x="210" y="554.9" width="32" height="0.1" fill="#2563eb"/><rect x="248" y="554.9" width="32" height="0.1" fill="#f97316"/><rect x="286" y="554.9" width="32" height="0.1" fill="#16a34a"/>
+  <text x="226" y="546" text-anchor="middle" class="value">2,999</text><text x="264" y="546" text-anchor="middle" class="value">2,999</text><text x="302" y="546" text-anchor="middle" class="value">2,999</text>
+  <rect x="470" y="487.5" width="32" height="67.5" fill="#2563eb"/><rect x="508" y="487.5" width="32" height="67.5" fill="#f97316"/><rect x="546" y="420.0" width="32" height="135.0" fill="#16a34a"/>
+  <text x="486" y="479" text-anchor="middle" class="value">4,498,494</text><text x="524" y="479" text-anchor="middle" class="value">4,498,500</text><text x="562" y="412" text-anchor="middle" class="value">8,996,845</text>
+  <rect x="730" y="521.4" width="32" height="33.6" fill="#2563eb"/><rect x="768" y="487.6" width="32" height="67.4" fill="#f97316"/><rect x="806" y="488.8" width="32" height="66.2" fill="#16a34a"/>
+  <text x="746" y="513" text-anchor="middle" class="value">2,236,867</text><text x="784" y="479" text-anchor="middle" class="value">4,495,497</text><text x="822" y="480" text-anchor="middle" class="value">4,470,744</text>
+  <text x="264" y="576" text-anchor="middle" class="label">정렬</text><text x="524" y="576" text-anchor="middle" class="label">역순</text><text x="784" y="576" text-anchor="middle" class="label">무작위</text>
+
+  <text x="130" y="662" class="panel">원소 이동 횟수</text>
+  <line x1="130" y1="835" x2="940" y2="835" class="axis"/><line x1="130" y1="685" x2="130" y2="835" class="axis"/>
+  <line x1="130" y1="760" x2="940" y2="760" class="grid"/><line x1="130" y1="685" x2="940" y2="685" class="grid"/>
+  <text x="120" y="840" text-anchor="end" class="label">0</text><text x="120" y="765" text-anchor="end" class="label">7M</text><text x="120" y="690" text-anchor="end" class="label">14M</text>
+  <rect x="210" y="834.9" width="32" height="0.1" fill="#2563eb"/><line x1="248" y1="834.5" x2="280" y2="834.5" stroke="#f97316" stroke-width="1"/><line x1="286" y1="834.5" x2="318" y2="834.5" stroke="#16a34a" stroke-width="1"/>
+  <text x="226" y="826" text-anchor="middle" class="value">5,998</text><text x="264" y="826" text-anchor="middle" class="value">0</text><text x="302" y="826" text-anchor="middle" class="value">0</text>
+  <rect x="470" y="786.8" width="32" height="48.2" fill="#2563eb"/><rect x="508" y="690.4" width="32" height="144.6" fill="#f97316"/><rect x="546" y="690.4" width="32" height="144.6" fill="#16a34a"/>
+  <text x="486" y="778" text-anchor="middle" class="value">4,504,349</text><text x="524" y="682" text-anchor="middle" class="value">13,495,053</text><text x="562" y="682" text-anchor="middle" class="value">13,495,053</text>
+  <rect x="730" y="811.0" width="32" height="24.0" fill="#2563eb"/><rect x="768" y="763.2" width="32" height="71.8" fill="#f97316"/><rect x="806" y="763.2" width="32" height="71.8" fill="#16a34a"/>
+  <text x="746" y="803" text-anchor="middle" class="value">2,239,875</text><text x="784" y="755" text-anchor="middle" class="value">6,701,631</text><text x="822" y="755" text-anchor="middle" class="value">6,701,631</text>
+  <text x="264" y="856" text-anchor="middle" class="label">정렬</text><text x="524" y="856" text-anchor="middle" class="label">역순</text><text x="784" y="856" text-anchor="middle" class="label">무작위</text>
+
+  <text x="130" y="942" class="panel">추가 메모리 peak (바이트)</text>
+  <line x1="130" y1="1115" x2="940" y2="1115" class="axis"/><line x1="130" y1="965" x2="130" y2="1115" class="axis"/>
+  <line x1="130" y1="1040" x2="940" y2="1040" class="grid"/><line x1="130" y1="965" x2="940" y2="965" class="grid"/>
+  <text x="120" y="1120" text-anchor="end" class="label">0</text><text x="120" y="1045" text-anchor="end" class="label">160</text><text x="120" y="970" text-anchor="end" class="label">320</text>
+  <rect x="210" y="1045.6" width="32" height="69.4" fill="#2563eb"/><rect x="248" y="1011.9" width="32" height="103.1" fill="#f97316"/><rect x="286" y="1085.0" width="32" height="30.0" fill="#16a34a"/>
+  <text x="226" y="1037" text-anchor="middle" class="value">148</text><text x="264" y="1003" text-anchor="middle" class="value">220</text><text x="302" y="1077" text-anchor="middle" class="value">64</text>
+  <rect x="470" y="1045.6" width="32" height="69.4" fill="#2563eb"/><rect x="508" y="982.2" width="32" height="132.8" fill="#f97316"/><rect x="546" y="1085.0" width="32" height="30.0" fill="#16a34a"/>
+  <text x="486" y="1037" text-anchor="middle" class="value">148</text><text x="524" y="974" text-anchor="middle" class="value">284</text><text x="562" y="1077" text-anchor="middle" class="value">64</text>
+  <rect x="730" y="1045.6" width="32" height="69.4" fill="#2563eb"/><rect x="768" y="982.2" width="32" height="132.8" fill="#f97316"/><rect x="806" y="1085.0" width="32" height="30.0" fill="#16a34a"/>
+  <text x="746" y="1037" text-anchor="middle" class="value">148</text><text x="784" y="974" text-anchor="middle" class="value">284</text><text x="822" y="1077" text-anchor="middle" class="value">64</text>
+  <text x="264" y="1136" text-anchor="middle" class="label">정렬</text><text x="524" y="1136" text-anchor="middle" class="label">역순</text><text x="784" y="1136" text-anchor="middle" class="label">무작위</text>
+  <text x="500" y="1210" text-anchor="middle" class="label">각 묶음 안의 막대 순서: 삽입 정렬, 버블 정렬, 놈 정렬</text>
+</svg>
