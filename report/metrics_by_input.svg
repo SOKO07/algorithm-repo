@@ -11,7 +11,7 @@
   <text x="500" y="32" text-anchor="middle" class="title">n = 3,000: 입력 유형별 정렬 성능</text>
   <rect x="295" y="52" width="16" height="16" fill="#2563eb"/><text x="317" y="65" class="label">삽입 정렬</text>
   <rect x="445" y="52" width="16" height="16" fill="#f97316"/><text x="467" y="65" class="label">버블 정렬</text>
-  <rect x="595" y="52" width="16" height="16" fill="#16a34a"/><text x="617" y="65" class="label">놈 정렬</text>
+  <rect x="595" y="52" width="16" height="16" fill="#16a34a"/><text x="617" y="65" class="label">노움 정렬</text>
 
   <text x="130" y="102" class="panel">실행 시간 (ms, 로그 눈금)</text>
   <line x1="130" y1="275" x2="940" y2="275" class="axis"/><line x1="130" y1="125" x2="130" y2="275" class="axis"/>
@@ -60,5 +60,5 @@
   <rect x="730" y="1045.6" width="32" height="69.4" fill="#2563eb"/><rect x="768" y="982.2" width="32" height="132.8" fill="#f97316"/><rect x="806" y="1085.0" width="32" height="30.0" fill="#16a34a"/>
   <text x="746" y="1037" text-anchor="middle" class="value">148</text><text x="784" y="974" text-anchor="middle" class="value">284</text><text x="822" y="1077" text-anchor="middle" class="value">64</text>
   <text x="264" y="1136" text-anchor="middle" class="label">정렬</text><text x="524" y="1136" text-anchor="middle" class="label">역순</text><text x="784" y="1136" text-anchor="middle" class="label">무작위</text>
-  <text x="500" y="1210" text-anchor="middle" class="label">각 묶음 안의 막대 순서: 삽입 정렬, 버블 정렬, 놈 정렬</text>
+  <text x="500" y="1210" text-anchor="middle" class="label">각 묶음 안의 막대 순서: 삽입 정렬, 버블 정렬, 노움 정렬</text>
 </svg>
