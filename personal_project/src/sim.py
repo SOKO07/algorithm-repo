@@ -68,6 +68,11 @@ def collides(pose, obstacles):
 
 BORDER_R = 2.0
 BORDER_STEP = 1.5
+# Between two neighbouring circles the chain dips by r - sqrt(r^2 - (step/2)^2),
+# about 0.15.  Shifting the circles inward by that much keeps the virtual
+# border at least as strict as the real boundary, so a robot can never slip
+# between circles and hit the edge unseen.
+BORDER_INSET = 0.15
 
 
 def border_circles(pose):
@@ -86,7 +91,8 @@ def border_circles(pose):
             continue
         lo = max(0.0, along - SENSE_RANGE - BORDER_R)
         hi = min(WIDTH, along + SENSE_RANGE + BORDER_R)
-        off = -BORDER_R if edge == 0.0 else edge + BORDER_R
+        off = (-BORDER_R + BORDER_INSET if edge == 0.0
+               else edge + BORDER_R - BORDER_INSET)
         t = math.floor(lo / BORDER_STEP) * BORDER_STEP
         while t <= hi:
             cx, cy = (t, off) if horizontal else (off, t)
