@@ -9,7 +9,12 @@ Bug2, 동적 창 접근법)을 같은 조건에서 비교한다. 계획은 [ROAD
 
 ## 환경
 
-- Python 3.13에서 확인했다. 지금까지의 코드는 표준 라이브러리만 쓴다.
+- Python 3.13에서 확인했다. 시뮬레이터, 알고리즘, 튜닝은 표준 라이브러리만 쓴다.
+- 그림을 그리는 `plot_traj.py`만 matplotlib이 필요하다 (3.10.3에서 확인).
+
+```bash
+pip install matplotlib
+```
 - 모든 명령은 `personal_project/` 폴더에서 실행한다.
 
 ```bash
@@ -28,6 +33,8 @@ src/algo_bug2.py       Bug2 (연속 공간)
 src/tune_bug2.py       Bug2 파라미터 탐색 (튜닝 시드만 사용)
 src/algo_dwa.py        동적 창 접근법 (DWA)
 src/tune_dwa.py        DWA 파라미터 탐색 (튜닝 시드만 사용, 병렬)
+src/plot_traj.py       대표 궤적 그림 생성 (matplotlib 필요)
+figures/               생성된 그림 (fig_wall.png, fig_traj_*.png)
 src/check_straight.py  직진 더미를 평가 시드에서 돌려 보는 점검 스크립트
 tests/test_sim.py      시뮬레이터 단위 테스트
 tests/test_apf.py      APF 단위 테스트
@@ -95,6 +102,20 @@ python src/tune_dwa.py
 타임아웃 수를 출력한다. 워커 프로세스 4개로 병렬 실행하며(`src/tune_dwa.py`의 `WORKERS`),
 **1시간 안팎 걸린다** (우리 환경에서 약 64분). 끝나야 결과가 한꺼번에 출력된다. 확정값은
 `src/algo_dwa.py`의 `BETA`, `GAMMA`, `T_PRED`에 적혀 있다(1.0 / 2.0 / 1.5). 평가 시드는 쓰지 않는다.
+
+### 7. 대표 궤적 그림
+
+```bash
+python src/plot_traj.py
+```
+
+`figures/`에 그림 4개를 만든다. 약 10초 걸린다(우리 환경에서 7~8초).
+
+- `fig_wall.png`: 시작-목표 직선에 수직으로 놓인 긴 벽에서 세 알고리즘 비교
+- `fig_traj_open.png`, `fig_traj_cluttered.png`, `fig_traj_corridor.png`: 튜닝 시드 3번 지도 하나씩에서
+  세 알고리즘 비교
+
+평가 시드 지도는 쓰지 않는다. matplotlib이 없으면 설치 안내를 출력하고 종료한다.
 
 ## 설정값
 

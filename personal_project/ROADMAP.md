@@ -34,7 +34,7 @@
 - [x] Bug2 (연속 공간, 튜닝 시드에서 `HIT_DIST=2.0`, `FOLLOW_DIST=1.0`, `LEAVE_TOL=2.0` 확정)
 - [x] DWA (튜닝 시드에서 `BETA=1.0`, `GAMMA=2.0`, `T_PRED=1.5` 확정)
 - [x] 튜닝 시드에서 파라미터 조정 후 동결, 값 기록
-- [ ] 알고리즘별 대표 궤적 시각화
+- [x] 알고리즘별 대표 궤적 시각화 (`src/plot_traj.py`, `figures/`)
 
 ### 3주차 (11/28~12/4): 본 실험
 - [ ] 평가 시드 900회 실행, CSV 저장
@@ -48,6 +48,6 @@
 - [ ] 12/12 LearnUs 제출 (보고서 PDF, 저장소 URL + ZIP)
 
 ## 미결정
-- 시각화: matplotlib 사용 시 Dockerfile 수정 필요 (템플릿 규약은 표준 모듈만)
+- (결정됨) 시각화는 matplotlib, 계산은 표준 라이브러리 (근거: final_report.md). 교수님 Docker 이미지 포함 여부는 미확인
 - (결정됨) Bug2는 연속 공간
 - 제출용 저장소: template 저장소 분리 여부
