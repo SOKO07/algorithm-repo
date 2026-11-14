@@ -34,12 +34,17 @@ src/tune_bug2.py       Bug2 파라미터 탐색 (튜닝 시드만 사용)
 src/algo_dwa.py        동적 창 접근법 (DWA)
 src/tune_dwa.py        DWA 파라미터 탐색 (튜닝 시드만 사용, 병렬)
 src/plot_traj.py       대표 궤적 그림 생성 (matplotlib 필요)
+src/reference.py       A* 기준 최단 경로 길이 (비교 대상 아님, 자 역할)
+src/run_experiment.py  본실험 실행기 (이어 돌리기, 타이밍 모드)
+src/summarize.py       결과 CSV 요약 (Wilson 구간, McNemar)
 figures/               생성된 그림 (fig_wall.png, fig_traj_*.png)
 src/check_straight.py  직진 더미를 평가 시드에서 돌려 보는 점검 스크립트
 tests/test_sim.py      시뮬레이터 단위 테스트
 tests/test_apf.py      APF 단위 테스트
 tests/test_bug2.py     Bug2 단위 테스트
 tests/test_dwa.py      DWA 단위 테스트
+tests/test_reference.py   A* 기준선 테스트
+tests/test_summarize.py   요약 통계 함수 테스트
 ```
 
 ## 실행
@@ -50,7 +55,7 @@ tests/test_dwa.py      DWA 단위 테스트
 python -m unittest discover -s tests -v
 ```
 
-26개 테스트가 모두 `ok`여야 한다. 수 초 걸린다.
+34개 테스트가 모두 `ok`여야 한다. 수 초 걸린다.
 
 ### 2. 지도 생성 확인
 
@@ -116,6 +121,27 @@ python src/plot_traj.py
   세 알고리즘 비교
 
 평가 시드 지도는 쓰지 않는다. matplotlib이 없으면 설치 안내를 출력하고 종료한다.
+
+### 8. 본실험 (평가 시드 — 파라미터를 모두 확정한 뒤에만)
+
+본실험은 **1개 프로세스로**, 다른 무거운 작업 없이 돌린다(계산 시간이 지표이므로). 중간에 끊겨도
+같은 명령으로 이어진다.
+
+```bash
+python src/run_experiment.py --set eval --out results/main.csv
+python src/run_experiment.py --set eval --out results/timing.csv --timing
+python src/summarize.py results/main.csv --timing results/timing.csv --md results/summary.md
+```
+
+`--set tune`으로 바꾸면 튜닝 시드로 같은 파이프라인을 시험할 수 있고, `--limit N`은 유형당 앞의
+N개 시드만 쓴다. 예를 들어 파이프라인 시험:
+
+```bash
+python src/run_experiment.py --set tune --limit 3 --out smoke.csv
+python src/summarize.py smoke.csv
+```
+
+(위 시험은 약 10초 걸린다. 평가 시드 전체 소요 시간은 아직 재 보지 않았다.)
 
 ## 설정값
 
