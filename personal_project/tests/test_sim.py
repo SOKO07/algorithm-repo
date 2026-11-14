@@ -37,9 +37,23 @@ class SimTest(unittest.TestCase):
         self.assertTrue(sim.collides((50.0 + gap - 0.01, 50.0, 0), [(50.0, 50.0, 5.0)]))
 
     def test_visibility_limited_by_range(self):
-        near, far = (20.0, 5.0, 2.0), (90.0, 5.0, 2.0)
-        vis = sim.visible_obstacles((5.0, 5.0, 0.0), [near, far])
-        self.assertEqual(vis, [near])
+        near, far = (20.0, 30.0, 2.0), (90.0, 30.0, 2.0)
+        vis = sim.visible_obstacles((20.0, 40.0, 0.0), [near, far])
+        self.assertIn(near, vis)
+        self.assertNotIn(far, vis)
+
+    def test_border_visible_only_near_edge(self):
+        self.assertEqual(sim.border_circles((50.0, 50.0, 0.0)), [])
+        near = sim.border_circles((50.0, 5.0, 0.0))
+        self.assertTrue(near)
+        self.assertTrue(all(cy < 0 for _, cy, _ in near))  # only the y=0 edge
+
+    def test_border_circles_agree_with_boundary_collision(self):
+        # a robot just inside the collision limit touches a border circle
+        for pose in ((50.0, sim.ROBOT_RADIUS + 0.2, 0.0), (99.0 - 0.2, 50.0, 0.0)):
+            self.assertFalse(sim.collides(pose, sim.border_circles(pose)))
+        for pose in ((50.0, sim.ROBOT_RADIUS - 0.3, 0.0), (99.3, 50.0, 0.0)):
+            self.assertTrue(sim.collides(pose, sim.border_circles(pose)))
 
     def test_commands_are_clipped(self):
         p = sim.move((50.0, 50.0, 0.0), 99.0, 99.0)

@@ -66,9 +66,40 @@ def collides(pose, obstacles):
                for ox, oy, r in obstacles)
 
 
+BORDER_R = 2.0
+BORDER_STEP = 1.5
+
+
+def border_circles(pose):
+    """Virtual circles tangent to the world edges, only those within sense range.
+
+    The world boundary is treated as an obstacle: the sensor reports it like
+    any other circle, and leaving the world still counts as a collision.
+    """
+    x, y = pose[0], pose[1]
+    out = []
+    # (edge coordinate, horizontal?) -- horizontal edges are y=0 and y=HEIGHT
+    for edge, horizontal in ((0.0, True), (HEIGHT, True), (0.0, False), (WIDTH, False)):
+        across = y if horizontal else x   # robot's distance axis to the edge
+        along = x if horizontal else y    # robot's coordinate along the edge
+        if abs(across - edge) > SENSE_RANGE + BORDER_R:
+            continue
+        lo = max(0.0, along - SENSE_RANGE - BORDER_R)
+        hi = min(WIDTH, along + SENSE_RANGE + BORDER_R)
+        off = -BORDER_R if edge == 0.0 else edge + BORDER_R
+        t = math.floor(lo / BORDER_STEP) * BORDER_STEP
+        while t <= hi:
+            cx, cy = (t, off) if horizontal else (off, t)
+            if math.hypot(x - cx, y - cy) - BORDER_R <= SENSE_RANGE:
+                out.append((cx, cy, BORDER_R))
+            t += BORDER_STEP
+    return out
+
+
 def visible_obstacles(pose, obstacles):
-    return [(ox, oy, r) for ox, oy, r in obstacles
-            if math.hypot(pose[0] - ox, pose[1] - oy) - r <= SENSE_RANGE]
+    vis = [(ox, oy, r) for ox, oy, r in obstacles
+           if math.hypot(pose[0] - ox, pose[1] - oy) - r <= SENSE_RANGE]
+    return vis + border_circles(pose)
 
 
 def run(algo, game_map, max_steps=MAX_STEPS):
