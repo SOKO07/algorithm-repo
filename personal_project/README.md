@@ -4,7 +4,7 @@
 Bug2, 동적 창 접근법)을 같은 조건에서 비교한다. 계획은 [ROADMAP.md](ROADMAP.md),
 작업 규칙은 [project_guidelines.md](project_guidelines.md)에 있다.
 
-> 진행 중이다. 아래 내용은 지금까지 구현한 부분(지도 생성, 시뮬레이터, APF, Bug2)만 다룬다.
+> 진행 중이다. 아래 내용은 지금까지 구현한 부분(지도 생성, 시뮬레이터, APF, Bug2, DWA)만 다룬다.
 > 알고리즘 구현과 본 실험은 단계가 끝날 때마다 이 문서에 추가한다.
 
 ## 환경
@@ -26,10 +26,13 @@ src/algo_apf.py        인공 포텐셜 필드 (APF)
 src/tune_apf.py        APF 파라미터 탐색 (튜닝 시드만 사용)
 src/algo_bug2.py       Bug2 (연속 공간)
 src/tune_bug2.py       Bug2 파라미터 탐색 (튜닝 시드만 사용)
+src/algo_dwa.py        동적 창 접근법 (DWA)
+src/tune_dwa.py        DWA 파라미터 탐색 (튜닝 시드만 사용, 병렬)
 src/check_straight.py  직진 더미를 평가 시드에서 돌려 보는 점검 스크립트
 tests/test_sim.py      시뮬레이터 단위 테스트
 tests/test_apf.py      APF 단위 테스트
 tests/test_bug2.py     Bug2 단위 테스트
+tests/test_dwa.py      DWA 단위 테스트
 ```
 
 ## 실행
@@ -40,7 +43,7 @@ tests/test_bug2.py     Bug2 단위 테스트
 python -m unittest discover -s tests -v
 ```
 
-21개 테스트가 모두 `ok`여야 한다.
+26개 테스트가 모두 `ok`여야 한다. 수 초 걸린다.
 
 ### 2. 지도 생성 확인
 
@@ -82,6 +85,17 @@ python src/tune_bug2.py
 도착·충돌·타임아웃 수를 출력한다. 수 분 걸린다. 확정값은 `src/algo_bug2.py`의
 `HIT_DIST`, `FOLLOW_DIST`, `LEAVE_TOL`에 적혀 있다(2.0 / 1.0 / 2.0). 평가 시드는 쓰지 않는다.
 
+### 6. DWA 파라미터 탐색
+
+```bash
+python src/tune_dwa.py
+```
+
+튜닝 시드 147개 지도에서 `beta` × `gamma` × `t_pred` 12가지를 돌려 설정마다 도착·충돌·
+타임아웃 수를 출력한다. 워커 프로세스 4개로 병렬 실행하며(`src/tune_dwa.py`의 `WORKERS`),
+**1시간 안팎 걸린다** (우리 환경에서 약 64분). 끝나야 결과가 한꺼번에 출력된다. 확정값은
+`src/algo_dwa.py`의 `BETA`, `GAMMA`, `T_PRED`에 적혀 있다(1.0 / 2.0 / 1.5). 평가 시드는 쓰지 않는다.
+
 ## 설정값
 
 | 항목 | 값 | 위치 |
@@ -92,6 +106,7 @@ python src/tune_bug2.py
 | 튜닝 시드 / 평가 시드 | 0~49 / 1000~1299 | `mapgen.py` |
 | 시간 간격 / 최대 속도 / 최대 회전 속도 | 0.1 s / 2.0 / 2.0 rad/s | `sim.py` |
 | 센서 범위 / 도착 허용 거리 / 최대 스텝 | 15 / 1.5 / 3000 | `sim.py` |
-| 지도 경계 | 센서에 가상 원으로 보임 (반지름 2, 간격 1.5), 나가면 충돌 | `sim.py` |
+| 지도 경계 | 센서에 가상 원으로 보임 (반지름 2, 간격 1.5, 안쪽 0.15), 나가면 충돌 | `sim.py` |
 | APF `k_rep` / `d0` | 2.5 / 12.0 (튜닝 시드에서 확정) | `algo_apf.py` |
 | Bug2 `hit_dist` / `follow_dist` / `leave_tol` | 2.0 / 1.0 / 2.0 (튜닝 시드에서 확정) | `algo_bug2.py` |
+| DWA `beta` / `gamma` / `t_pred` | 1.0 / 2.0 / 1.5 (튜닝 시드에서 확정) | `algo_dwa.py` |
